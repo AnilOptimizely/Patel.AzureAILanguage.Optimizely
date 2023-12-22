@@ -40,41 +40,40 @@ namespace AzureAILanguage.Services
             }
             return new DetectedLanguage();
         }
-        public async Task<List<string>> ExtractiveSummarisation(string textToTransliterate)
+
+        public List<string> ProcessExtractiveSummarisation(List<string> batchedDocuments)
+        {
+            var analyseExtractiveSummarisation = ExtractiveSummarisation(batchedDocuments).Result;
+            return analyseExtractiveSummarisation;
+        }
+
+        private async Task<List<string>> ExtractiveSummarisation(List<string> batchedDocuments)
         {
             var listSentences = new List<string>();
-            if (!string.IsNullOrWhiteSpace(textToTransliterate))
+            // Perform the text analysis operation.
+            ExtractiveSummarizeOperation operation = GetTextAnalyticsClient().ExtractiveSummarize(WaitUntil.Completed, batchedDocuments);
+            Console.WriteLine($"Extractive Summarisation operation has completed");
+
+            Console.WriteLine($"Created On   : {operation.CreatedOn}");
+            Console.WriteLine($"Expires On   : {operation.ExpiresOn}");
+            Console.WriteLine($"Status       : {operation.Status}");
+
+            await foreach (ExtractiveSummarizeResultCollection documentsInPage in operation.Value)
             {
-                // Prepare the input of the text analysis operation.
-                List<string> batchedDocuments = new()
+                Console.WriteLine($"Extractive Summarisation, version: \"{documentsInPage.ModelVersion}\"");
+                Console.WriteLine();
+
+                foreach (ExtractiveSummarizeResult documentResult in documentsInPage)
                 {
-                    textToTransliterate
-                };
-                // Perform the text analysis operation.
-                ExtractiveSummarizeOperation operation = GetTextAnalyticsClient().ExtractiveSummarize(WaitUntil.Completed, batchedDocuments);
-                Console.WriteLine($"Extractive Summarisation operation has completed");
-
-                Console.WriteLine($"Created On   : {operation.CreatedOn}");
-                Console.WriteLine($"Expires On   : {operation.ExpiresOn}");
-                Console.WriteLine($"Status       : {operation.Status}");
-
-                await foreach (ExtractiveSummarizeResultCollection documentsInPage in operation.Value)
-                {
-                    Console.WriteLine($"Extractive Summarise, version: \"{documentsInPage.ModelVersion}\"");
-                    Console.WriteLine();
-
-                    foreach (ExtractiveSummarizeResult documentResult in documentsInPage)
+                    if (documentResult.HasError)
                     {
-                        if (documentResult.HasError)
-                        {
-                            continue;
-                        }
-                        Console.WriteLine($"  Extracted the following {documentResult.Sentences.Count} sentence(s):");
-                        foreach (ExtractiveSummarySentence sentence in documentResult.Sentences)
-                        {
-                            Console.WriteLine($"  Sentence: {sentence.Text}");
-                            listSentences.Add(sentence.Text);
-                        }
+                        continue;
+                    }
+                    Console.WriteLine($"  Extracted the following {documentResult.Sentences.Count} sentence(s):");
+                    foreach (ExtractiveSummarySentence sentence in documentResult.Sentences)
+                    {
+                        Console.WriteLine($"  Sentence: {sentence.Text}");
+                        listSentences.Add(sentence.Text);
                     }
                 }
             }
@@ -125,53 +124,44 @@ namespace AzureAILanguage.Services
             }
             return TextSentiment.Neutral;
         }
-        public Task<List<string>> ExtractKeyPhrasesFromText(string keyPhraseText)
+
+        public List<string> ExtractKeyPhrasesFromText(List<string> batchedDocuments)
         {
             var listPhrases = new List<string>();
-            if (!string.IsNullOrWhiteSpace(keyPhraseText))
+            var processRequest = GetTextAnalyticsClient().ExtractKeyPhrasesBatch(batchedDocuments);
+            Console.WriteLine($"Key Phrase Extraction operation of text field has completed");
+            var keyPhrases = processRequest.Value;
+            
+            Console.WriteLine($"Number of Key Phrases detected is: {keyPhrases.Count}");
+            foreach (var keyPhrase in keyPhrases)
             {
-                Response<KeyPhraseCollection> processRequest = GetTextAnalyticsClient().ExtractKeyPhrases(keyPhraseText);
-                Console.WriteLine($"Key Phrase Extraction operation of text field has completed");
-                KeyPhraseCollection keyPhrases = processRequest.Value;
-                Console.WriteLine($"Number of Key Phrases detected is: {keyPhrases.Count}");
-                foreach (string keyPhrase in keyPhrases)
+                foreach (var keyPhraseText in keyPhrase.KeyPhrases)
                 {
                     Console.WriteLine($"  Key Phrase: {keyPhrase}");
-                    listPhrases.Add(keyPhrase);
+                    listPhrases.Add(keyPhraseText);
                 }
             }
-            return Task.FromResult(listPhrases);
+            return listPhrases;
         }
-        public Task<List<string>> RecogniseLinkedEntitiesFromText(string linkedEntitiesText)
+
+        public List<string> RecogniseLinkedEntitiesFromText(List<string> batchedDocuments)
         {
-            var listPhrases = new List<string>();
-            if (!string.IsNullOrWhiteSpace(linkedEntitiesText))
+            var listLinkedEntities = new List<string>();
+            var response = GetTextAnalyticsClient().RecognizeEntitiesBatch(batchedDocuments);
+            var linkedEntities = response.Value;
+
+            Console.WriteLine($"Recognise Linked Entities operation of text field has completed");
+            Console.WriteLine($"Recognised {linkedEntities.Count} entities:");
+
+            foreach (var linkedEntity in linkedEntities)
             {
-                try
+                foreach (var match in linkedEntity.Entities)
                 {
-                    Response<LinkedEntityCollection> response = GetTextAnalyticsClient().RecognizeLinkedEntities(linkedEntitiesText);
-                    LinkedEntityCollection linkedEntities = response.Value;
-                    Console.WriteLine($"Recognise Linked Entities operation of text field has completed");
-                    Console.WriteLine($"Recognised {linkedEntities.Count} entities:");
-                    foreach (var linkedEntity in response.Value)
-                    {
-                        Console.WriteLine($"  Name: {linkedEntity.Name}");
-                        foreach (LinkedEntityMatch match in linkedEntity.Matches)
-                        {
-                            listPhrases.Add(match.Text);
-                        }
-                    }
-                    return Task.FromResult(listPhrases);
+                    Console.WriteLine($"  Name: {match.Text}");
+                    listLinkedEntities.Add(match.Text);
                 }
-                catch (RequestFailedException exception)
-                {
-                    Console.WriteLine($"Error Code: {exception.ErrorCode}");
-                    Console.WriteLine($"Message: {exception.Message}");
-                }
-
             }
-            return Task.FromResult(listPhrases);
-
+            return listLinkedEntities;
         }
 
         public List<string> ProcessHealthcareContentFromText(string healthcareText)

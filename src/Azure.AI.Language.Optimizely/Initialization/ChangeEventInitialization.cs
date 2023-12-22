@@ -100,6 +100,32 @@ namespace OptimizelyResearch.Business.Initialization
                                         e.CancelAction = true;
                                     }
                                 }
+                                //Abstractive Summarisation
+                                var processAbstractiveSummarisation = OptimizelyCmsHelpers.ProcessAbstractiveSummarisation(content);
+                                if (!string.IsNullOrWhiteSpace(processAbstractiveSummarisation))
+                                {
+                                    listErrorMessages.Add(processAbstractiveSummarisation);
+                                }
+
+                                //Key Phrase Summarisation
+                                var processKeyPhraseExtraction = OptimizelyCmsHelpers.ProcessKeyPhraseExtraction(content);
+                                if (!string.IsNullOrWhiteSpace(processKeyPhraseExtraction))
+                                {
+                                    listErrorMessages.Add(processKeyPhraseExtraction);
+                                }
+
+                                // Extractive Summarisation
+                                var processExtractionSummarisation = OptimizelyCmsHelpers.ProcessExtractiveSummarisation(content);
+                                if (!string.IsNullOrWhiteSpace(processExtractionSummarisation))
+                                {
+                                    listErrorMessages.Add(processExtractionSummarisation);
+                                }
+                                // Linked Entity 
+                                var processLinkedEntities = OptimizelyCmsHelpers.ProcessLinkedEntities(content);
+                                if (!string.IsNullOrWhiteSpace(processLinkedEntities))
+                                {
+                                    listErrorMessages.Add(processLinkedEntities);
+                                }
 
                                 if (listErrorMessages.Any())
                                 {
@@ -108,16 +134,6 @@ namespace OptimizelyResearch.Business.Initialization
                                     e.CancelReason = startString + errorMessagesString + endString;
                                     e.CancelAction = true;
                                 }
-
-                                //Abstractive Summarisation
-                                var processAbstractiveSummarisation = OptimizelyCmsHelpers.ProcessAbstractiveSummarisation(content);
-                                if (!string.IsNullOrWhiteSpace(processAbstractiveSummarisation))
-                                {
-                                    e.Content = content;
-                                    e.CancelReason = startString + processAbstractiveSummarisation + endString;
-                                    e.CancelAction = true;
-                                }
-
                             }
                         }
                     }

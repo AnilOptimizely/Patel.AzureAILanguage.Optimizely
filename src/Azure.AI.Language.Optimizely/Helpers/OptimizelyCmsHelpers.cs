@@ -240,5 +240,140 @@ namespace Azure.AI.Language.Optimizely.Helpers
             }
             return "";
         }
+
+        public static string ProcessKeyPhraseExtraction(IContent content)
+        {
+            var getKeyPhraseExtractionAttributes = GetPropertiesWithAttribute(content, typeof(KeyPhraseExtractionAttribute));
+            var getKeyPhraseExtractionListAttribute = GetPropertiesWithAttribute(content, typeof(KeyPhraseExtractionListAttribute));
+            var listStringsForKeyPhraseExtraction = new List<string>();
+
+            if (getKeyPhraseExtractionAttributes.Any() && getKeyPhraseExtractionAttributes != null)
+            {
+                if (!getKeyPhraseExtractionListAttribute.Any() && getKeyPhraseExtractionListAttribute == null)
+                {
+                    return "Please create a IList<String> property with attribute TextAnalyticsAllowed in order to process ";
+                }
+                if (getKeyPhraseExtractionListAttribute.Any() && getKeyPhraseExtractionListAttribute.Count > 1)
+                {
+                    return "Please only have 1 CMS IList<String> property with attribute KeyPhraseExtractionList on a page in order to process the Key Phrase Extraction correctly.";
+                }
+                foreach (var attribute in getKeyPhraseExtractionAttributes)
+                {
+                    var getTextValue = attribute.Property.GetValue(attribute.Content).ToString();
+                    if (!string.IsNullOrWhiteSpace(getTextValue))
+                    {
+                        listStringsForKeyPhraseExtraction.Add(getTextValue);
+                    }
+                }
+                if (listStringsForKeyPhraseExtraction.Any() && listStringsForKeyPhraseExtraction != null)
+                {
+                    var keyPhraseExtractionList = _azureTextAnalyticsService.Service.ExtractKeyPhrasesFromText(listStringsForKeyPhraseExtraction);
+                    if (keyPhraseExtractionList.Any() && keyPhraseExtractionList != null)
+                    {
+                        var getFirstAbstractiveSummarisationListAttribute = getKeyPhraseExtractionListAttribute.FirstOrDefault();
+                        getFirstAbstractiveSummarisationListAttribute.Property.SetValue(getFirstAbstractiveSummarisationListAttribute.Content, keyPhraseExtractionList);
+                        var getObject = getFirstAbstractiveSummarisationListAttribute.Property.GetValue(getFirstAbstractiveSummarisationListAttribute.Content);
+                        var checkObject = getObject.GetType().GetProperties().Any();
+                        return checkObject ? "" : "Error with saving the Key phrase extraction. Please try again";
+                    }
+                }
+            }
+
+            if (getKeyPhraseExtractionListAttribute.Any() && getKeyPhraseExtractionListAttribute.Count > 1)
+            {
+                return "Please create a string property with attribute AbstractiveSummarisation on a page in order to process the Abstractive Summarisation feature correctly.";
+            }
+            return "";
+        }
+
+        public static string ProcessExtractiveSummarisation(IContent content)
+        {
+            var getExtractionSummarisationAttributes = GetPropertiesWithAttribute(content, typeof(ExtractionSummarisationAttribute));
+            var getExtractionSummarisationListAttribute = GetPropertiesWithAttribute(content, typeof(ExtractionSummarisationListAttribute));
+            var listStringsForExtractionSummarisation = new List<string>();
+
+            if (listStringsForExtractionSummarisation.Any() && listStringsForExtractionSummarisation != null)
+            {
+                if (!getExtractionSummarisationListAttribute.Any() && getExtractionSummarisationListAttribute == null)
+                {
+                    return "Please create a IList<String> property with attribute TextAnalyticsAllowed in order to process ";
+                }
+                if (getExtractionSummarisationListAttribute.Any() && getExtractionSummarisationListAttribute.Count > 1)
+                {
+                    return "Please only have 1 CMS IList<String> property with attribute ExtractionSummarisationList on a page in order to process the Extraction Summarisation correctly.";
+                }
+                foreach (var attribute in getExtractionSummarisationAttributes)
+                {
+                    var getTextValue = attribute.Property.GetValue(attribute.Content).ToString();
+                    if (!string.IsNullOrWhiteSpace(getTextValue))
+                    {
+                        listStringsForExtractionSummarisation.Add(getTextValue);
+                    }
+                }
+                if (listStringsForExtractionSummarisation.Any() && listStringsForExtractionSummarisation != null)
+                {
+                    var extractionSummarisationList = _azureTextAnalyticsService.Service.ProcessExtractiveSummarisation(listStringsForExtractionSummarisation);
+                    if (extractionSummarisationList.Any() && extractionSummarisationList != null)
+                    {
+                        var getFirstAbstractiveSummarisationListAttribute = getExtractionSummarisationListAttribute.FirstOrDefault();
+                        getFirstAbstractiveSummarisationListAttribute.Property.SetValue(getFirstAbstractiveSummarisationListAttribute.Content, extractionSummarisationList);
+                        var getObject = getFirstAbstractiveSummarisationListAttribute.Property.GetValue(getFirstAbstractiveSummarisationListAttribute.Content);
+                        var checkObject = getObject.GetType().GetProperties().Any();
+                        return checkObject ? "" : "Error with saving the Extractive Summarisation process. Please try again";
+                    }
+                }
+            }
+
+            if (getExtractionSummarisationListAttribute.Any() && getExtractionSummarisationListAttribute.Count > 1)
+            {
+                return "Please create a string property with attribute ExtractionSummarisation on a page in order to process the Extractive Summarisation feature correctly.";
+            }
+            return "";
+        }
+
+        public static string ProcessLinkedEntities(IContent content)
+        {
+            var getLinkedEntityAttributes = GetPropertiesWithAttribute(content, typeof(RecongniseLinkedEntitiesAttribute));
+            var getLinkedEntityListAttribute = GetPropertiesWithAttribute(content, typeof(RecongniseLinkedEntitiesListAttribute));
+            var listStringsForLinkedEntities = new List<string>();
+
+            if (listStringsForLinkedEntities.Any() && listStringsForLinkedEntities != null)
+            {
+                if (!getLinkedEntityListAttribute.Any() && getLinkedEntityListAttribute == null)
+                {
+                    return "Please create a IList<String> property with attribute TextAnalyticsAllowed in order to process ";
+                }
+                if (getLinkedEntityListAttribute.Any() && getLinkedEntityListAttribute.Count > 1)
+                {
+                    return "Please only have 1 CMS IList<String> property with attribute ExtractionSummarisationList on a page in order to process the Extraction Summarisation correctly.";
+                }
+                foreach (var attribute in getLinkedEntityAttributes)
+                {
+                    var getTextValue = attribute.Property.GetValue(attribute.Content).ToString();
+                    if (!string.IsNullOrWhiteSpace(getTextValue))
+                    {
+                        listStringsForLinkedEntities.Add(getTextValue);
+                    }
+                }
+                if (listStringsForLinkedEntities.Any() && listStringsForLinkedEntities != null)
+                {
+                    var extractionSummarisationList = _azureTextAnalyticsService.Service.RecogniseLinkedEntitiesFromText(listStringsForLinkedEntities);
+                    if (extractionSummarisationList.Any() && extractionSummarisationList != null)
+                    {
+                        var getFirstAbstractiveSummarisationListAttribute = getLinkedEntityListAttribute.FirstOrDefault();
+                        getFirstAbstractiveSummarisationListAttribute.Property.SetValue(getFirstAbstractiveSummarisationListAttribute.Content, extractionSummarisationList);
+                        var getObject = getFirstAbstractiveSummarisationListAttribute.Property.GetValue(getFirstAbstractiveSummarisationListAttribute.Content);
+                        var checkObject = getObject.GetType().GetProperties().Any();
+                        return checkObject ? "" : "Error with saving the Extractive Summarisation process. Please try again";
+                    }
+                }
+            }
+
+            if (getLinkedEntityListAttribute.Any() && getLinkedEntityListAttribute.Count > 1)
+            {
+                return "Please create a string property with attribute ExtractionSummarisation on a page in order to process the Extractive Summarisation feature correctly.";
+            }
+            return "";
+        }
     }
 }
