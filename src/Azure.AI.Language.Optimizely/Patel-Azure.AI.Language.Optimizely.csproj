@@ -15,7 +15,7 @@
 		<Nullable>disable</Nullable>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Version>1.0.0.2</Version>
+		<Version>1.0.0.3</Version>
 		<IsPackable>true</IsPackable>
 		<!--<RepositoryUrl>https://github.com/AnilOptimizely/Patel-AzureAIContentSafety</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/AnilOptimizely/Patel-AzureAIContentSafety</PackageProjectUrl>-->
@@ -29,7 +29,7 @@
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<RepositoryType>git</RepositoryType>
 		<!--<PackageReadmeFile>README.md</PackageReadmeFile>-->
-		<AssemblyVersion>1.0.0.2</AssemblyVersion>
+		<AssemblyVersion>1.0.0.3</AssemblyVersion>
 		<PackageReleaseNotes>Release that includes the first iteration of Azure AI Language - Text Analytics - Integration with Optimizely CMS.</PackageReleaseNotes>
 		<Title>Patel.Azure.AI.Language.Optimizely</Title>
 	</PropertyGroup>
