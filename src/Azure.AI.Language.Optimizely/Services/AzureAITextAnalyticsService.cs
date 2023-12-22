@@ -4,6 +4,10 @@ using AzureAILanguage.Interfaces;
 using Microsoft.Extensions.Options;
 using Azure.AI.Language.Optimizely;
 using EPiServer.ServiceLocation;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using System;
+using System.Linq;
 
 namespace AzureAILanguage.Services
 {

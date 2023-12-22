@@ -11,6 +11,8 @@ using EPiServer.Logging;
 using EPiServer.ServiceLocation;
 using EPiServer.Web.Routing;
 using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
+using System.Linq;
 using ILogger = EPiServer.Logging.ILogger;
 
 namespace OptimizelyResearch.Business.Initialization
@@ -54,7 +56,9 @@ namespace OptimizelyResearch.Business.Initialization
                         {
                             bool value = (bool)getAllowedValue;
                             if (value)
-                            {   
+                            {
+                                var startString = "Unable to publish - Azure AI Language - Text Analytics has detected the following ";
+                                var endString = "Please review content and publish again";
                                 var listErrorMessages = new List<string>();
                                 // Sentiment analysis
                                 var processSentiment = OptimizelyCmsHelpers.ProcessSentimentAnalysis(content);
@@ -99,15 +103,20 @@ namespace OptimizelyResearch.Business.Initialization
 
                                 if (listErrorMessages.Any())
                                 {
-                                    var startString = "Unable to publish - Azure AI Language - Text Analytics has detected the following ";
                                     var errorMessagesString = string.Join(", ", listErrorMessages);
-                                    var endString = "Please review content and publish again";
-
                                     e.Content = content;
                                     e.CancelReason = startString + errorMessagesString + endString;
                                     e.CancelAction = true;
                                 }
-                                
+
+                                //Abstractive Summarisation
+                                var processAbstractiveSummarisation = OptimizelyCmsHelpers.ProcessAbstractiveSummarisation(content);
+                                if (!string.IsNullOrWhiteSpace(processAbstractiveSummarisation))
+                                {
+                                    e.Content = content;
+                                    e.CancelReason = startString + processAbstractiveSummarisation + endString;
+                                    e.CancelAction = true;
+                                }
 
                             }
                         }
@@ -121,216 +130,28 @@ namespace OptimizelyResearch.Business.Initialization
                             e.CancelAction = true;
                         }
                     }
-                    //if (getStartPage.AnalyseText)
-                    //{
-                    //    //if (getStartPage.DetectTextRequest)
-                    //    //{
-                    //    //    if (!string.IsNullOrWhiteSpace(standardPage.LanguageDetectionText))
-                    //    //    {
-                    //    //        var textRequest = _azureTextAnalyticsService.Service.LanguageDetectionExample(standardPage.LanguageDetectionText).Result;
-                    //    //        if (!string.IsNullOrWhiteSpace(textRequest.Iso6391Name) && !string.IsNullOrWhiteSpace(textRequest.Name))
-                    //    //        {
-                    //    //            if (textRequest.Iso6391Name != standardPage.Language.TwoLetterISOLanguageName)
-                    //    //            {
-                    //    //                e.Content = standardPage;
-                    //    //                e.CancelReason = string.Format("Unable to publish content - Azure AI Language has decteted {0} for the content published which is different to the current page language: {1}:  Please review content and publish again",
-                    //    //                    textRequest.Name, standardPage.Language.NativeName);
-                    //    //                e.CancelAction = true;
-                    //    //            }
-                    //    //        }
-                    //    //    }
-                    //    //}
+                    
 
-                    //    //if (getStartPage.DetectLanguageTextPage)
-                    //    //{
-                    //    //    var detectLanguageResults = _azureTextAnalyticsService.Service.LanguageDetectionExamplePage(standardPage).Result;
+                    
 
-                    //    //    if (detectLanguageResults != null && detectLanguageResults.Any())
-                    //    //    {
-                    //    //        var getOccurances = detectLanguageResults.Where(a => a.PrimaryLanguage.Iso6391Name != standardPage.Language.TwoLetterISOLanguageName).Select(a => a.PrimaryLanguage.Name).ToList();
-                    //    //        var result = String.Join(", ", getOccurances);
-                    //    //        e.Content = standardPage;
-                    //    //        e.CancelReason = string.Format("Unable to publish content - Azure AI Language has decteted: {0} for the content published which is different to the current page language: {1}:  Please review content and publish again",
-                    //    //            result, standardPage.Language.NativeName);
-                    //    //        e.CancelAction = true;
-                    //    //    }
-                    //    //}
+                   
 
-                    //    //if (getStartPage.AbstractText)
-                    //    //{
-                    //    //    if (!string.IsNullOrWhiteSpace(standardPage.AbstractiveSummarisationText))
-                    //    //    {
-                    //    //        standardPage.AbstractiveSummarisationList = new List<string>();
+                    
 
-                    //    //        var summarisationList = _azureTextAnalyticsService.Service.AbstractiveSummarisation(standardPage.AbstractiveSummarisationText).GetAwaiter().GetResult();
-                    //    //        if (summarisationList.Any() && summarisationList != null)
-                    //    //        {
-                    //    //            if (summarisationList.Count > 1)
-                    //    //            {
-                    //    //                standardPage.AbstractiveSummarisationList = summarisationList;
-                    //    //            }
-                    //    //            else
-                    //    //            {
-                    //    //                standardPage.AbstractiveSummarisationSentence = summarisationList.FirstOrDefault();
-                    //    //            }
-                    //    //        }
-                    //    //    }
-                    //    //}
+                    
 
-                    //    //if (getStartPage.AbstractTextMultipleProperties)
-                    //    //{
-                    //    //    standardPage.AbstractiveSummarisationList = new List<string>();
+                    
 
-                    //    //    var summarisationList = _azureTextAnalyticsService.Service.AbstractiveSummarisationOfMultipleProperties(standardPage).GetAwaiter().GetResult();
-                    //    //    if (summarisationList.Any() && summarisationList != null)
-                    //    //    {
-                    //    //        if (summarisationList.Count > 1)
-                    //    //        {
-                    //    //            standardPage.AbstractiveSummarisationList = summarisationList;
-                    //    //        }
-                    //    //        else
-                    //    //        {
-                    //    //            standardPage.AbstractiveSummarisationSentence = summarisationList.FirstOrDefault();
-                    //    //        }
-                    //    //    }
-                    //    //}
+                    
 
-                    //    //if (getStartPage.AnalyseSentimentText)
-                    //    //{
-                    //    //    if (!string.IsNullOrWhiteSpace(standardPage.SentimentText))
-                    //    //    {
-                    //    //        var analyseText = _azureTextAnalyticsService.Service.AnalyseSentimentTextField(standardPage.SentimentText).Result;
-                    //    //        if (analyseText == Azure.AI.TextAnalytics.TextSentiment.Mixed)
-                    //    //        {
-                    //    //            e.Content = standardPage;
-                    //    //            e.CancelReason = string.Format("Unable to publish content - Azure AI Language has decteted Mixed Sentiment content : {0} Please review content and publish again", standardPage.SentimentText);
-                    //    //            e.CancelAction = true;
-                    //    //        }
-                    //    //        if (analyseText == Azure.AI.TextAnalytics.TextSentiment.Negative)
-                    //    //        {
-                    //    //            e.Content = standardPage;
-                    //    //            e.CancelReason = string.Format("Unable to publish content - Azure AI Language has decteted Negative Sentiment content : {0} Please review content and publish again", standardPage.SentimentText);
-                    //    //            e.CancelAction = true;
-                    //    //        }
-                    //    //    }
-                    //    //}
+                    
+                   
 
-                    //    //if (getStartPage.AnalyseSentimentTextMultipleProperties)
-                    //    //{
-                    //    //    var analyseText = _azureTextAnalyticsService.Service.AnalyseSentimentOfMultiplePageProperties(standardPage).Result;
+                   
 
-                    //    //    if (analyseText != null && analyseText.Any())
-                    //    //    {
-                    //    //        var getOccurancesNegative = analyseText.Where(a => a.Sentiment == TextSentiment.Negative).ToList();
-                    //    //        var getOccurancesMixed = analyseText.Where(a => a.Sentiment == TextSentiment.Mixed).ToList();
-                    //    //        e.Content = standardPage;
-                    //    //        e.CancelReason = string.Format("Unable to publish content - Azure AI Language has detected {0} counts of Negative Sentiment and {1} counts of Mixed Sentiment in the Standard Page. Please review content and publish again",
-                    //    //            getOccurancesNegative.Count, getOccurancesMixed.Count);
-                    //    //        e.CancelAction = true;
-                    //    //    }
-                    //    //}
+                    
 
-                    //    //if (getStartPage.KeyPhrase)
-                    //    //{
-                    //    //    if (!string.IsNullOrWhiteSpace(standardPage.KeyPhraseText))
-                    //    //    {
-                    //    //        var keyPhrase = _azureTextAnalyticsService.Service.ExtractKeyPhrasesFromText(standardPage.KeyPhraseText).Result;
-                    //    //        if (keyPhrase != null && keyPhrase.Any())
-                    //    //        {
-                    //    //            standardPage.KeyPhrasesList = keyPhrase;
-                    //    //        }
-                    //    //    }
-                    //    //}
-
-                    //    //if (getStartPage.KeyPhraseCollection)
-                    //    //{
-                    //    //    var keyPhraseCollection = _azureTextAnalyticsService.Service.ExtractKeyPhrasesFromMultipleProperties(standardPage).Result;
-                    //    //    if (keyPhraseCollection != null && keyPhraseCollection.Any())
-                    //    //    {
-                    //    //        standardPage.KeyPhraseCollectionList = keyPhraseCollection;
-                    //    //    }
-                    //    //}
-
-                    //    //if (getStartPage.ExtractText)
-                    //    //{
-                    //    //    if (!string.IsNullOrWhiteSpace(standardPage.ExtractiveSummarisationText))
-                    //    //    {
-                    //    //        standardPage.ExtractiveSummarisationTextList = new List<string>();
-                    //    //        standardPage.ExtractiveSummarisationTextList = _azureTextAnalyticsService.Service.ExtractiveSummarisation(standardPage.ExtractiveSummarisationText).GetAwaiter().GetResult();
-                    //    //    }
-                    //    //}
-
-                    //    //if (getStartPage.ExtractiveSummarisationPage)
-                    //    //{
-                    //    //    standardPage.ExtractiveSummarisationTextList = new List<string>();
-                    //    //    standardPage.ExtractiveSummarisationTextList = _azureTextAnalyticsService.Service.ExtractiveSummarisationOfMultipleProperties(standardPage).GetAwaiter().GetResult();
-                    //    //}
-
-                    //    //if (getStartPage.RecognizeLinkedEntities)
-                    //    //{
-                    //    //    if (!string.IsNullOrWhiteSpace(standardPage.LinkedEntitiesText))
-                    //    //    {
-                    //    //        standardPage.LinkedEntitiesTextList = _azureTextAnalyticsService.Service.RecogniseLinkedEntitiesFromText(standardPage.LinkedEntitiesText).GetAwaiter().GetResult();
-                    //    //    }
-                    //    //}
-
-                    //    //if (getStartPage.RecognizeLinkedEntitiesMultipleProperties)
-                    //    //{
-                    //    //    standardPage.LinkedEntitiesTextList = _azureTextAnalyticsService.Service.RecogniseLinkedEntitiesFromMultiplePageProperties(standardPage).GetAwaiter().GetResult();
-                    //    //}
-
-                    //    //if (getStartPage.HealthcareAnalysisText)
-                    //    //{
-                    //    //    if (!string.IsNullOrWhiteSpace(standardPage.HealthcareText))
-                    //    //    {
-                    //    //        standardPage.HealthCareTextList = new List<string>();
-                    //    //        var healthCareTextList = _azureTextAnalyticsService.Service.AnalyseHealthcareContentFromText(standardPage.HealthcareText).GetAwaiter().GetResult();
-                    //    //        if (getStartPage.AllowHealthCareContent)
-                    //    //        {
-                    //    //            if (healthCareTextList != null && healthCareTextList.Any())
-                    //    //            {
-                    //    //                foreach (var healthCare in healthCareTextList)
-                    //    //                {
-                    //    //                    standardPage.HealthCareTextList.Add(healthCare.Text);
-                    //    //                }
-                    //    //            }
-                    //    //        }
-                    //    //        else
-                    //    //        {
-                    //    //            if (healthCareTextList != null && healthCareTextList.Any())
-                    //    //            {
-                    //    //                e.Content = standardPage;
-                    //    //                e.CancelReason = string.Format("Unable to publish content - Azure AI Language has detected {0} counts of Healthcare related content in the text field 'Healthcare text'. Please review content and publish again",
-                    //    //                    healthCareTextList.Count, standardPage.HealthcareText);
-                    //    //                e.CancelAction = true;
-                    //    //            }
-                    //    //        }
-                    //    //    }
-
-                    //    //}
-
-                    //    //if (getStartPage.HealthCareAnalysisMultipleProperties)
-                    //    //{
-                    //    //    standardPage.HealthCareTextList = new List<string>();
-                    //    //    var healthCareMultiplePropertiesList = _azureTextAnalyticsService.Service.AnalyseHealthcareContentFromMultipleProperties(standardPage).GetAwaiter().GetResult();
-                    //    //    if (getStartPage.AllowHealthCareContent)
-                    //    //    {
-                    //    //        if (healthCareMultiplePropertiesList != null && healthCareMultiplePropertiesList.Any())
-                    //    //        {
-                    //    //            standardPage.HealthCareTextList = healthCareMultiplePropertiesList;
-                    //    //        }
-                    //    //    }
-                    //    //    else
-                    //    //    {
-                    //    //        if (healthCareMultiplePropertiesList != null && healthCareMultiplePropertiesList.Any())
-                    //    //        {
-                    //    //            e.Content = standardPage;
-                    //    //            e.CancelReason = string.Format("Unable to publish content - Azure AI Language has detected {0} counts of Healthcare content across multiple properties on the Standard Page. Please review content and publish again", healthCareMultiplePropertiesList.Count, standardPage.HealthcareText);
-                    //    //            e.CancelAction = true;
-                    //    //        }
-                    //    //    }
-                    //    //}
-                    //}
+                    
 
                 }
             }

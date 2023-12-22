@@ -6,7 +6,9 @@ using AzureAILanguage.Interfaces;
 using EPiServer;
 using EPiServer.Core;
 using EPiServer.ServiceLocation;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace Azure.AI.Language.Optimizely.Helpers
@@ -187,7 +189,7 @@ namespace Azure.AI.Language.Optimizely.Helpers
                 {
                     healthcareContentMessage = " 1 count of Healthcare related content ";
                 }
-                else
+                if (res > 1)
                 {
                     healthcareContentMessage = string.Format(" {0} counts of Healthcare related content ", res);
                 }

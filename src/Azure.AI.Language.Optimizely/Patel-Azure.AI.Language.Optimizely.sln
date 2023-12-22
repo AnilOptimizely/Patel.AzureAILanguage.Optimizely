@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azure.AI.Language.Optimizely", "Azure.AI.Language.Optimizely.csproj", "{8BB3CC87-3107-471E-87CD-917D7BCFD348}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patel-Azure.AI.Language.Optimizely", "Patel-Azure.AI.Language.Optimizely.csproj", "{8BB3CC87-3107-471E-87CD-917D7BCFD348}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,6 @@
 ﻿using Azure.AI.TextAnalytics;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AzureAILanguage.Interfaces
 {
