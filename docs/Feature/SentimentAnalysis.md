@@ -1,4 +1,4 @@
-# [TextAnalysis]
+# [SentimentAnalysis]
 
 The following attribute enables users to incorporate a string property within the CMS, which will undergo Sentiment Analysis via the Text Analytics API as an integral feature of the Azure AI Language Service. This will happen for each property 
 which has this attribute applied to. 
