@@ -20,13 +20,13 @@ public class StartPage : SitePageData
 {
      [Display(
          GroupName = SystemTabNames.Content,
-         Name = "Recongnise Linked Entities Text",
-         Description = "Text used for the Recongnise Linked Entities feature",
+         Name = "Key Phrase Extraction Text",
+         Description = "Text used for the Key Phrase Extraction feature",
          Order = 10)]
      [CultureSpecific]
      [UIHint(UIHint.Textarea)]
-     [RecongniseLinkedEntities]
-     public virtual string RecongniseLinkedEntitiesText { get; set; }
+     [KeyPhraseExtraction]
+     public virtual string KeyPhraseExtractionText { get; set; }
 }
 ```
 **Example of [KeyPhraseExtractionList] attribute**
@@ -35,12 +35,12 @@ public class StartPage : SitePageData
 {
     [Display(
          GroupName = SystemTabNames.Content,
-         Name = "Recongnise Linked Entities List",
-         Description = "List used for the Recongnise Linked Entities feature",
+         Name = "Key Phrase Extraction List",
+         Description = "List used for the Key Phrase Extraction feature",
          Order = 20)]
      [CultureSpecific]
-     [RecongniseLinkedEntitiesList]
-     public virtual IList<string> RecongniseLinkedEntitiesList { get; set; }
+     [KeyPhraseExtractionList]
+     public virtual IList<string> KeyPhraseExtractionList { get; set; }
 }
 ```
 
