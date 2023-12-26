@@ -47,4 +47,4 @@ public class StartPage : SitePageData
 
 Screenshot of Attribute being used
 
-For more information about the [ExtractionSummarisationList] attribute, click [here](https://github.com/AnilOptimizely/Patel-Azure.AI.Language.Optimizely/edit/develop/docs/Feature/ExtractionSummarisationList.md)
+For more information about the [RecongniseLinkedEntitiesList] attribute, click [here]()
