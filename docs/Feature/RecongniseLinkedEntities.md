@@ -17,17 +17,17 @@ The attribute can exclusively be added to one or more string properties and is a
 public class StartPage : SitePageData
 {
      [Display(
-    GroupName = SystemTabNames.Content,
-    Name = "Extractive Summarisation Text",
-    Description = "Text used for the Extraction Summarisation feature",
-    Order = 10)]
-[CultureSpecific]
-[UIHint(UIHint.Textarea)]
-[ExtractionSummarisation]
-public virtual string ExtractiveSummarisationText { get; set; }
+         GroupName = SystemTabNames.Content,
+         Name = "Recongnise Linked Entities Text",
+         Description = "Text used for the Recongnise Linked Entities feature",
+         Order = 10)]
+     [CultureSpecific]
+     [UIHint(UIHint.Textarea)]
+     [RecongniseLinkedEntities]
+     public virtual string RecongniseLinkedEntitiesText { get; set; }
 }
 ```
-**Example of [ExtractionSummarisationList] attribute**
+**Example of [RecongniseLinkedEntitiesList] attribute**
 ``` C#
 public class StartPage : SitePageData
 {
