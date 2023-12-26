@@ -46,4 +46,6 @@ public virtual IList<string> ExtractiveSummarisationList { get; set; }
 
 Screenshot of Attribute being used
 
+For more information about the [ExtractionSummarisationList] attribute, click [here](https://github.com/AnilOptimizely/Patel-Azure.AI.Language.Optimizely/edit/develop/docs/Feature/ExtractionSummarisationList.md)
+
 
