@@ -5,7 +5,9 @@ via the Text Analytics API as an integral feature of the Azure AI Language Servi
 which has this attribute applied to.
 
 When content is being published in the CMS, For each [RecongniseLinkedEntities] attribute used, 
-the Text Analytics API will indentify and disambiguate the identity of entities found in the content being published. The API will return a list of these linked entities which is then used to populate an IList property of type IList string which has a [RecongniseLinkedEntitiesList] attribute assigned to it. It is advised that only one instance of the [RecongniseLinkedEntitiesList] attribute is added to each content type, when the RecongniseLinkedEntities attribute is used
+the Text Analytics API will indentify and disambiguate the identity of entities found in the content being published. 
+
+The API will return a list of these linked entities which is then used to populate an IList property of type IList string which has a [RecongniseLinkedEntitiesList] attribute assigned to it. It is advised that only one instance of the [RecongniseLinkedEntitiesList] attribute is added to each content type, when the RecongniseLinkedEntities attribute is used
 
 The attribute may be applied to the following property types:
 
@@ -32,13 +34,13 @@ public class StartPage : SitePageData
 public class StartPage : SitePageData
 {
     [Display(
-    GroupName = SystemTabNames.Content,
-    Name = "Extractive Summarisation List",
-    Description = "List used for the Extraction Summarisation feature",
-    Order = 15)]
-[CultureSpecific]
-[ExtractionSummarisationList]
-public virtual IList<string> ExtractiveSummarisationList { get; set; }
+         GroupName = SystemTabNames.Content,
+         Name = "Recongnise Linked Entities List",
+         Description = "List used for the Recongnise Linked Entities feature",
+         Order = 20)]
+     [CultureSpecific]
+     [RecongniseLinkedEntitiesList]
+     public virtual IList<string> RecongniseLinkedEntitiesList { get; set; }
 }
 ```
 
