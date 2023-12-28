@@ -2,7 +2,7 @@
 
 ## Intro
 
-This is a extension which integrates Azure AI Language - Text Analytics within Optimizely CMS 12. This is built on an Alloy CMS template site to provide a platform/foundation to users as to how the Text Analytics service can be used to carry out various functions within Optimizely CMS to allow content editors/users of the CMS to enchance the content which is being published within the CMS. These functions are shown below
+This is an Add-On which integrates Azure AI Language - Text Analytics within Optimizely CMS 12. The Add-On provides users, the features and ability to integrate various functions which are part of the Azure AI Language Service within Optimizely CMS to allow content users to enchance, moderate and leverage content which is being published within the CMS. Some examples of functionality within this Add-On consists of
 
 - Key Phrase Extraction
 - Sentiment Analysis
