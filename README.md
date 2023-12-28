@@ -2,20 +2,21 @@
 
 ## Intro
 
-This is an Add-On which integrates Azure AI Language - Text Analytics within Optimizely CMS 12. The Add-On provides users, the features and ability to integrate various functions which are part of the Azure AI Language Service within Optimizely CMS to allow content users to enchance, moderate and leverage content which is being published within the CMS. Some examples of functionality within this Add-On consists of
+This is an Add-On which integrates Azure AI Language - Text Analytics within Optimizely CMS 12. The Add-On provides users, the features and ability to integrate various functions which are part of the Azure AI Language Service within Optimizely CMS to allow content users to enchance, moderate and leverage content which is being published within the CMS. Some examples of functionality within this Add-On consists of the following.
 
-- Key Phrase Extraction
-- Sentiment Analysis
-- Text Analytics for Healthcare
-- Language Detection
-- Entity Linking
-- Extractive Summarisation
-- Abstractive Summarisation
+- [Key Phrase Extraction](https://learn.microsoft.com/en-gb/azure/ai-services/language-service/key-phrase-extraction/overview)
+- [Sentiment Analysis](https://learn.microsoft.com/en-gb/azure/ai-services/language-service/sentiment-opinion-mining/overview?tabs=prebuilt)
+- [Text Analytics for Healthcare](https://learn.microsoft.com/en-gb/azure/ai-services/language-service/text-analytics-for-health/overview?tabs=ner)
+- [Language Detection](https://learn.microsoft.com/en-gb/azure/ai-services/language-service/language-detection/overview)
+- [Entity Linking](https://learn.microsoft.com/en-gb/azure/ai-services/language-service/entity-linking/overview)
+- [Extractive Summarisation](https://learn.microsoft.com/en-gb/azure/ai-services/language-service/summarization/overview?tabs=document-summarization)
+- [Abstractive Summarisation](https://learn.microsoft.com/en-gb/azure/ai-services/language-service/summarization/overview?tabs=document-summarization)
 
 ## Installation
 
+Installation added soon
 ```
-dotnet add package
+dotnet add package 
 ```
 ## Setup
 
