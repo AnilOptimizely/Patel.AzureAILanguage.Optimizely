@@ -11,7 +11,7 @@ The attribute may be applied to the following property types:
 
 The attribute can exclusively be added to one or more string properties and is applicable to any content type derived from IContent (the base content type in Optimizely CMS).
 
-**Example fweefeff**
+**Example**
 ``` C#
 public class StartPage : SitePageData
 {
@@ -26,7 +26,6 @@ public class StartPage : SitePageData
    public virtual string SentimentAnalysis { get; set; }
 }
 ```
-
 **Screenshot of Attribute being used in the CMS and returning error for Negative Sentiment**
 ![Negative Sentiment.](/docs/Images/SentimentNegative.jpg)
 
