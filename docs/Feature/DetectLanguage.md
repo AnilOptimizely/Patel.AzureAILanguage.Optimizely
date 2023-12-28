@@ -25,12 +25,11 @@ public class StartPage : SitePageData
      public virtual string LanguageDetectionText { get; set; }
 }
 ```
-Screenshot of Attribute being used in the CMS
-
+**Screenshot of Attribute being used in the CMS**
 ![LanguageDetectionCMS.](https://github.com/AnilOptimizely/Patel-Azure.AI.Language.Optimizely/blob/main/docs/Images/LanguageDetectionCMS.jpg)
 
-Screenshot of Attribute returning back error for one language
+**Screenshot of Attribute returning back error for one language**
 ![LanguageDetectionCMSError.](/docs/Images/LanguageDetectionCMSError.jpg)
 
-Screenshot of Attribute returning back error for multiple languages
+**Screenshot of Attribute returning back error for multiple languages**
 ![LanguageDetectionCMSErrorMultipleLanguage.](/docs/Images/LanguageDetectionCMSErrorMultipleLanguages.jpg)
