@@ -53,10 +53,7 @@ Please visit [here](https://github.com/AnilOptimizely/Patel-Azure.AI.Language.Op
 
 ## More Information
 
-For more information, click on the below links:
-
-- Check this  [here](https://github.com/AnilOptimizely/Patel-Azure.AI.Language.Optimizely/blob/develop/docs/Attributes.md) to find out more information about the various attributes that are contained within this Add-On and how they work.
-- 
+Blog posts added soon
 
 
 
