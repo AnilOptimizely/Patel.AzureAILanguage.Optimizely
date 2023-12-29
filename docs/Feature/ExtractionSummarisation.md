@@ -33,14 +33,14 @@ public virtual string ExtractiveSummarisationText { get; set; }
 ``` C#
 public class StartPage : SitePageData
 {
-    [Display(
-    GroupName = SystemTabNames.Content,
-    Name = "Extractive Summarisation List",
-    Description = "List used for the Extraction Summarisation feature",
-    Order = 15)]
-[CultureSpecific]
-[ExtractionSummarisationList]
-public virtual IList<string> ExtractiveSummarisationList { get; set; }
+     [Display(
+        GroupName = SystemTabNames.Content,
+        Name = "Extractive Summarisation List",
+        Description = "List used for the Extraction Summarisation feature",
+        Order = 15)]
+    [CultureSpecific]
+    [ExtractionSummarisationList]
+    public virtual IList<string> ExtractiveSummarisationList { get; set; }
 }
 ```
 **Screenshot of Attribute being used in the CMS**
