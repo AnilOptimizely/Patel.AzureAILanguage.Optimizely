@@ -16,13 +16,13 @@ The attribute may be applied to the following property types:
 public class StartPage : SitePageData
 {
     [Display(
-    GroupName = SystemTabNames.Content,
-    Name = "Extractive Summarisation List",
-    Description = "List used for the Extraction Summarisation feature",
-    Order = 15)]
-[CultureSpecific]
-[ExtractionSummarisationList]
-public virtual IList<string> ExtractiveSummarisationList { get; set; }
+        GroupName = SystemTabNames.Content,
+        Name = "Extractive Summarisation List",
+        Description = "List used for the Extraction Summarisation feature",
+        Order = 15)]
+    [CultureSpecific]
+    [ExtractionSummarisationList]
+    public virtual IList<string> ExtractiveSummarisationList { get; set; }
 }
 ```
 **Screenshot of Attribute being used in the CMS and sentences and being populated with sentences from the API**
