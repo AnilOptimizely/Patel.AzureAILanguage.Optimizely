@@ -27,7 +27,7 @@ public class StartPage : SitePageData
      public virtual IList<string> KeyPhraseExtractionList { get; set; }
 }
 ```
-**Screenshot of Attribute being used in the CMS**
+**Screenshot of Attribute being used in the CMS and being populated with Key Phrases from the API**
 ![KeyPhrasesExtractionList](/docs/Images/KeyPhrasesExtractionList.jpg)
 
 For more information about the [KeyPhraseExtraction] attribute, click [here](https://github.com/AnilOptimizely/Patel-Azure.AI.Language.Optimizely/blob/develop/docs/Feature/KeyPhraseExtraction.md)
