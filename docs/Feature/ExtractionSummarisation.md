@@ -18,15 +18,15 @@ The attribute can exclusively be added to one or more string properties and is a
 ``` C#
 public class StartPage : SitePageData
 {
-     [Display(
-    GroupName = SystemTabNames.Content,
-    Name = "Page description",
-    Description = "Text used for the Extraction Summarisation feature",
-    Order = 10)]
-[CultureSpecific]
-[UIHint(UIHint.Textarea)]
-[ExtractionSummarisation]
-public virtual string ExtractiveSummarisationText { get; set; }
+   [Display(
+         GroupName = SystemTabNames.Content,
+         Name = "Extractive Summarisation Text",
+         Description = "Text used for the Extraction Summarisation feature",
+         Order = 10)]
+   [CultureSpecific]
+   [UIHint(UIHint.Textarea)]
+   [ExtractionSummarisation]
+   public virtual string ExtractiveSummarisationText { get; set; }
 }
 ```
 **Example of [ExtractionSummarisationList] attribute**
