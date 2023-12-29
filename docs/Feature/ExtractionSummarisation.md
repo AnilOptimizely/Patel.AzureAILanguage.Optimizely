@@ -1,7 +1,8 @@
 # [ExtractionSummarisation]
 
-The following attribute enables users to incorporate a string property within the CMS, which will undergo Extraction Summarisation Analysis via the Text Analytics API as an integral feature of the Azure AI Language Service. This will happen for each property 
-which has this attribute applied to. 
+The following attribute enables users to incorporate a string property within the CMS, which will undergo Extraction Summarisation Analysis via the Text Analytics API as an integral feature of the Azure AI Language Service. This will happen for each property which has this attribute applied to. 
+
+Extractive Summarisation is a feature offered by the Azure AI Language as part of Text Analytics. When used, the feature produces a summary by extracting sentences that collectively represent the most important or relevant information within the original text which is being used for this. The features uses natural language processing(NLP) techniques to locate key sentences in the text being used for this.
 
 When content is being published in the CMS, For each [ExtractionSummarisation] attribute used, the Text Analytics API will return a list of  by extracting sentences that collectively represent the most important or relevant information within the original content.
 
@@ -19,7 +20,7 @@ public class StartPage : SitePageData
 {
      [Display(
     GroupName = SystemTabNames.Content,
-    Name = "Extractive Summarisation Text",
+    Name = "Page description",
     Description = "Text used for the Extraction Summarisation feature",
     Order = 10)]
 [CultureSpecific]
@@ -42,9 +43,8 @@ public class StartPage : SitePageData
 public virtual IList<string> ExtractiveSummarisationList { get; set; }
 }
 ```
-
-
-Screenshot of Attribute being used
+**Screenshot of Attribute being used in the CMS**
+![ExtractiveSummarisationList.](/docs/Images/ExtractiveSummarisation.jpg)
 
 For more information about the [ExtractionSummarisationList] attribute, click [here](https://github.com/AnilOptimizely/Patel-Azure.AI.Language.Optimizely/edit/develop/docs/Feature/ExtractionSummarisationList.md)
 
