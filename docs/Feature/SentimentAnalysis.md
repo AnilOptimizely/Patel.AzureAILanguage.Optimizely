@@ -15,15 +15,15 @@ The attribute can exclusively be added to one or more string properties and is a
 ``` C#
 public class StartPage : SitePageData
 {
-     [Display(
-       GroupName = SystemTabNames.Content,
-       Name = "Sentiment Text",
-       Description = "Text to be used for the Sentiment Analysis feature as part of the Azure Text Analytics feature",
-       Order = 10)]
-   [CultureSpecific]
-   [UIHint(UIHint.Textarea)]
-   [SentimentAnalysis]
-   public virtual string SentimentAnalysis { get; set; }
+    [Display(
+        GroupName = SystemTabNames.Content,
+        Name = "Sentiment Text",
+        Description = "Text to be used for the Sentiment Analysis feature as part of the Azure Text Analytics feature",
+        Order = 10)]
+    [CultureSpecific]
+    [UIHint(UIHint.Textarea)]
+    [SentimentAnalysis]
+    public virtual string SentimentAnalysis { get; set; }
 }
 ```
 **Screenshot of Attribute being used in the CMS and returning error for Negative Sentiment**
