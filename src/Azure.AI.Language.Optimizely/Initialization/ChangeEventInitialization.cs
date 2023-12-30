@@ -129,7 +129,7 @@ namespace OptimizelyResearch.Business.Initialization
 
                                 if (listErrorMessages.Any())
                                 {
-                                    var errorMessagesString = string.Join(", ", listErrorMessages);
+                                    var errorMessagesString = string.Join(". ", listErrorMessages);
                                     e.Content = content;
                                     e.CancelReason = startString + errorMessagesString + endString;
                                     e.CancelAction = true;
@@ -146,29 +146,6 @@ namespace OptimizelyResearch.Business.Initialization
                             e.CancelAction = true;
                         }
                     }
-                    
-
-                    
-
-                   
-
-                    
-
-                    
-
-                    
-
-                    
-
-                    
-                   
-
-                   
-
-                    
-
-                    
-
                 }
             }
             
