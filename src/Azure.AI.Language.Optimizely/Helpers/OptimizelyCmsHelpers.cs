@@ -76,9 +76,18 @@ namespace Azure.AI.Language.Optimizely.Helpers
             {
                 foreach (var attribute in getSentimentAnalysisAttributes)
                 {
-                    var getTextValue = attribute.Property.GetValue(attribute.Content).ToString();
-                    var analyseSentiment = _azureTextAnalyticsService.Service.AnalyseSentimentTextField(getTextValue);
-                    listSentiments.Add(analyseSentiment);
+                    var checkTextValue = attribute.Property.GetValue(attribute.Content);
+                    if (checkTextValue != null)
+                    {
+                        var getTextValue = attribute.Property.GetValue(attribute.Content).ToString();
+                        var analyseSentiment = _azureTextAnalyticsService.Service.AnalyseSentimentTextField(getTextValue);
+                        listSentiments.Add(analyseSentiment);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                    
                 }
             }
             if (listSentiments.Any())
@@ -93,12 +102,12 @@ namespace Azure.AI.Language.Optimizely.Helpers
                     {
                         if (negativeSentiments.Count == 1)
                         {
-                            negativeText = string.Format(" 1 count of Negative Sentiment content in the content published. ");
+                            negativeText = string.Format("1 count of Negative Sentiment content in the content published");
                             sentimentTextList.Add(negativeText);
                         }
                         if (negativeSentiments.Count > 1)
                         {
-                            negativeText = string.Format(" {0} counts of Negative Sentiment content in the content published. ", negativeSentiments.Count);
+                            negativeText = string.Format("{0} counts of Negative Sentiment content in the content published", negativeSentiments.Count);
                             sentimentTextList.Add(negativeText);
                         }
                     }
@@ -106,12 +115,12 @@ namespace Azure.AI.Language.Optimizely.Helpers
                     {
                         if (mixedSentiments.Count == 1)
                         {
-                            mixedText = string.Format(" 1 count of Mixed Sentiment content in the content published. ");
+                            mixedText = string.Format("1 count of Mixed Sentiment content in the content published");
                             sentimentTextList.Add(mixedText);
                         }
                         if (mixedSentiments.Count > 1)
                         {
-                            mixedText = string.Format(" {0} counts of Mixed Sentiment related content in the content published. ", mixedSentiments.Count);
+                            mixedText = string.Format("{0} counts of Mixed Sentiment related content in the content published", mixedSentiments.Count);
                             sentimentTextList.Add(mixedText);
                         }
                     }
@@ -129,9 +138,17 @@ namespace Azure.AI.Language.Optimizely.Helpers
             {
                 foreach (var attribute in getdetectLanguageAttributes)
                 {
-                    var getTextValue = attribute.Property.GetValue(attribute.Content).ToString();
-                    var languageDetection = _azureTextAnalyticsService.Service.LanguageDetectionExample(getTextValue);
-                    listDetectedLanguages.Add(languageDetection);
+                    var checkTextValue = attribute.Property.GetValue(attribute.Content);
+                    if (checkTextValue != null)
+                    {
+                        var getTextValue = attribute.Property.GetValue(attribute.Content).ToString();
+                        var languageDetection = _azureTextAnalyticsService.Service.LanguageDetectionExample(getTextValue);
+                        listDetectedLanguages.Add(languageDetection);
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
             }
             if (listDetectedLanguages.Any())
@@ -147,7 +164,7 @@ namespace Azure.AI.Language.Optimizely.Helpers
                         {
                             var result = string.Join(", ", getLanguageOccurances);
                             languageDetectionTextList.Add(result);
-                            var middleMessage = " for the content published which is different to the current page language:" ;
+                            var middleMessage = "for the content published which is different to the current page language:" ;
                             languageDetectionTextList.Add(middleMessage);
                             languageDetectionTextList.Add(getPage.Language.NativeName);
                         }
@@ -177,9 +194,17 @@ namespace Azure.AI.Language.Optimizely.Helpers
             {
                 foreach (var attribute in getHealthcareContentAttributes)
                 {
-                    var getTextValue = attribute.Property.GetValue(attribute.Content).ToString();
-                    var healthCareContentList = _azureTextAnalyticsService.Service.ProcessHealthcareContentFromText(getTextValue);
-                    listHealthcareContent.Add(healthCareContentList.Count);
+                    var checkTextValue = attribute.Property.GetValue(attribute.Content);
+                    if (checkTextValue != null)
+                    {
+                        var getTextValue = attribute.Property.GetValue(attribute.Content).ToString();
+                        var healthCareContentList = _azureTextAnalyticsService.Service.ProcessHealthcareContentFromText(getTextValue);
+                        listHealthcareContent.Add(healthCareContentList.Count);
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
             }
             if (listHealthcareContent.Any())
@@ -187,11 +212,11 @@ namespace Azure.AI.Language.Optimizely.Helpers
                 int res = listHealthcareContent.AsQueryable().Sum();
                 if (res == 1)
                 {
-                    healthcareContentMessage = " 1 count of Healthcare related content ";
+                    healthcareContentMessage = " 1 count of Healthcare related content";
                 }
                 if (res > 1)
                 {
-                    healthcareContentMessage = string.Format(" {0} counts of Healthcare related content ", res);
+                    healthcareContentMessage = string.Format(" {0} counts of Healthcare related content", res);
                 }
             }
             return healthcareContentMessage;
@@ -207,18 +232,26 @@ namespace Azure.AI.Language.Optimizely.Helpers
             {
                 if (!getAbstractiveSummarisationListAttribute.Any() && getAbstractiveSummarisationListAttribute == null)
                 {
-                    return "Please create a IList<String> property with attribute TextAnalyticsAllowed in order to process ";
+                    return "Please create a IList<String> property with attribute TextAnalyticsAllowed in order to process";
                 }
                 if (getAbstractiveSummarisationListAttribute.Any() && getAbstractiveSummarisationListAttribute.Count > 1)
                 {
-                    return "Please only have 1 CMS IList<String> property with attribute AbstractiveSummarisationList on a page in order to process the Abstractive Summarisation correctly.";
+                    return "Please only have 1 CMS IList<String> property with attribute AbstractiveSummarisationList on a page in order to process the Abstractive Summarisation correctly";
                 }
                 foreach (var attribute in getAbstractiveSummarisationAttributes)
                 {
-                    var getTextValue = attribute.Property.GetValue(attribute.Content).ToString();
-                    if (!string.IsNullOrWhiteSpace(getTextValue))
+                    var checkTextValue = attribute.Property.GetValue(attribute.Content);
+                    if (checkTextValue != null)
                     {
-                        listStringsForAbstractiveSummarisation.Add(getTextValue);
+                        var getTextValue = attribute.Property.GetValue(attribute.Content).ToString();
+                        if (!string.IsNullOrWhiteSpace(getTextValue))
+                        {
+                            listStringsForAbstractiveSummarisation.Add(getTextValue);
+                        }
+                    }
+                    else
+                    {
+                        continue;
                     }
                 }
                 if (listStringsForAbstractiveSummarisation.Any() && listStringsForAbstractiveSummarisation != null)
@@ -251,18 +284,26 @@ namespace Azure.AI.Language.Optimizely.Helpers
             {
                 if (!getKeyPhraseExtractionListAttribute.Any() && getKeyPhraseExtractionListAttribute == null)
                 {
-                    return "Please create a IList<String> property with attribute TextAnalyticsAllowed in order to process ";
+                    return "Please create a IList<String> property with attribute TextAnalyticsAllowed in order to process";
                 }
                 if (getKeyPhraseExtractionListAttribute.Any() && getKeyPhraseExtractionListAttribute.Count > 1)
                 {
-                    return "Please only have 1 CMS IList<String> property with attribute KeyPhraseExtractionList on a page in order to process the Key Phrase Extraction correctly.";
+                    return "Please only have 1 CMS IList<String> property with attribute KeyPhraseExtractionList on a page in order to process the Key Phrase Extraction correctly";
                 }
                 foreach (var attribute in getKeyPhraseExtractionAttributes)
                 {
-                    var getTextValue = attribute.Property.GetValue(attribute.Content).ToString();
-                    if (!string.IsNullOrWhiteSpace(getTextValue))
+                    var checkTextValue = attribute.Property.GetValue(attribute.Content);
+                    if (checkTextValue != null)
                     {
-                        listStringsForKeyPhraseExtraction.Add(getTextValue);
+                        var getTextValue = attribute.Property.GetValue(attribute.Content).ToString();
+                        if (!string.IsNullOrWhiteSpace(getTextValue))
+                        {
+                            listStringsForKeyPhraseExtraction.Add(getTextValue);
+                        }
+                    }
+                    else
+                    {
+                        continue;
                     }
                 }
                 if (listStringsForKeyPhraseExtraction.Any() && listStringsForKeyPhraseExtraction != null)
@@ -296,18 +337,26 @@ namespace Azure.AI.Language.Optimizely.Helpers
             {
                 if (!getExtractionSummarisationListAttribute.Any() && getExtractionSummarisationListAttribute == null)
                 {
-                    return "Please create a IList<String> property with attribute TextAnalyticsAllowed in order to process ";
+                    return "Please create a IList<String> property with attribute TextAnalyticsAllowed in order to process";
                 }
                 if (getExtractionSummarisationListAttribute.Any() && getExtractionSummarisationListAttribute.Count > 1)
                 {
-                    return "Please only have 1 CMS IList<String> property with attribute ExtractionSummarisationList on a page in order to process the Extraction Summarisation correctly.";
+                    return "Please only have 1 CMS IList<String> property with attribute ExtractionSummarisationList on a page in order to process the Extraction Summarisation correctly";
                 }
                 foreach (var attribute in getExtractionSummarisationAttributes)
                 {
-                    var getTextValue = attribute.Property.GetValue(attribute.Content).ToString();
-                    if (!string.IsNullOrWhiteSpace(getTextValue))
+                    var checkTextValue = attribute.Property.GetValue(attribute.Content);
+                    if (checkTextValue != null)
                     {
-                        listStringsForExtractionSummarisation.Add(getTextValue);
+                        var getTextValue = attribute.Property.GetValue(attribute.Content).ToString();
+                        if (!string.IsNullOrWhiteSpace(getTextValue))
+                        {
+                            listStringsForExtractionSummarisation.Add(getTextValue);
+                        }
+                    }
+                    else
+                    {
+                        continue;
                     }
                 }
                 if (listStringsForExtractionSummarisation.Any() && listStringsForExtractionSummarisation != null)
@@ -326,7 +375,7 @@ namespace Azure.AI.Language.Optimizely.Helpers
 
             if (getExtractionSummarisationListAttribute.Any() && getExtractionSummarisationListAttribute.Count > 1)
             {
-                return "Please create a string property with attribute ExtractionSummarisation on a page in order to process the Extractive Summarisation feature correctly.";
+                return "Please create a string property with attribute ExtractionSummarisation on a page in order to process the Extractive Summarisation feature correctly";
             }
             return "";
         }
@@ -341,18 +390,26 @@ namespace Azure.AI.Language.Optimizely.Helpers
             {
                 if (!getLinkedEntityListAttribute.Any() && getLinkedEntityListAttribute == null)
                 {
-                    return "Please create a IList<String> property with attribute TextAnalyticsAllowed in order to process ";
+                    return "Please create a IList<String> property with attribute TextAnalyticsAllowed in order to process";
                 }
                 if (getLinkedEntityListAttribute.Any() && getLinkedEntityListAttribute.Count > 1)
                 {
-                    return "Please only have 1 CMS IList<String> property with attribute ExtractionSummarisationList on a page in order to process the Extraction Summarisation correctly.";
+                    return "Please only have 1 CMS IList<String> property with attribute ExtractionSummarisationList on a page in order to process the Extraction Summarisation correctly";
                 }
                 foreach (var attribute in getLinkedEntityAttributes)
                 {
-                    var getTextValue = attribute.Property.GetValue(attribute.Content).ToString();
-                    if (!string.IsNullOrWhiteSpace(getTextValue))
+                    var checkTextValue = attribute.Property.GetValue(attribute.Content);
+                    if (checkTextValue != null)
                     {
-                        listStringsForLinkedEntities.Add(getTextValue);
+                        var getTextValue = attribute.Property.GetValue(attribute.Content).ToString();
+                        if (!string.IsNullOrWhiteSpace(getTextValue))
+                        {
+                            listStringsForLinkedEntities.Add(getTextValue);
+                        }
+                    }
+                    else
+                    {
+                        continue;
                     }
                 }
                 if (listStringsForLinkedEntities.Any() && listStringsForLinkedEntities != null)
@@ -364,7 +421,7 @@ namespace Azure.AI.Language.Optimizely.Helpers
                         getFirstAbstractiveSummarisationListAttribute.Property.SetValue(getFirstAbstractiveSummarisationListAttribute.Content, extractionSummarisationList);
                         var getObject = getFirstAbstractiveSummarisationListAttribute.Property.GetValue(getFirstAbstractiveSummarisationListAttribute.Content);
                         var checkObject = getObject.GetType().GetProperties().Any();
-                        return checkObject ? "" : "Error with saving the Extractive Summarisation process. Please try again";
+                        return checkObject ? "" :"Error with saving the Extractive Summarisation process. Please try again";
                     }
                 }
             }
