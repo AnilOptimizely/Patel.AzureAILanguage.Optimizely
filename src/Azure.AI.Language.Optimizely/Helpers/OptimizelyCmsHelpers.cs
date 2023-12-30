@@ -90,7 +90,7 @@ namespace Azure.AI.Language.Optimizely.Helpers
                     
                 }
             }
-            if (listSentiments.Any())
+            if (listSentiments != null && listSentiments.Any())
             {
                 var negativeText = "";
                 var mixedText = "";
@@ -151,7 +151,7 @@ namespace Azure.AI.Language.Optimizely.Helpers
                     }
                 }
             }
-            if (listDetectedLanguages.Any())
+            if (listDetectedLanguages != null && listDetectedLanguages.Any())
             {
                 if (!ContentReference.IsNullOrEmpty(content.ContentLink))
                 {
@@ -207,7 +207,7 @@ namespace Azure.AI.Language.Optimizely.Helpers
                     }
                 }
             }
-            if (listHealthcareContent.Any())
+            if (listHealthcareContent != null && listHealthcareContent.Any())
             {
                 int res = listHealthcareContent.AsQueryable().Sum();
                 if (res == 1)
