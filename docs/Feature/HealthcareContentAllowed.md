@@ -17,11 +17,11 @@ The attribute can only be appended to bool properties and is intended for use ex
 public class StartPage : SitePageData
 {
   [Display(GroupName = SystemTabNames.Content,
-    Order = 10,
-    Description = "Boolean to determine if Text Analytics API for Azure AI Language is allowed",
-    Name = "Text Analytics Allowed")]
-[TextAnalyticsAllowed]
-public virtual bool TextAnalyticsAllowed { get; set; }
+    Order = 15,
+    Description = "Boolean to determine if Healthcare Content for Azure AI Language is allowed",
+    Name = "Healthcare Content Allowed")]
+  [HealthcareContentAllowed]
+  public virtual bool TextAnalyticsLanguageAllowed { get; set; }
 }
 ```
 

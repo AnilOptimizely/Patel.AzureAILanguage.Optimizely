@@ -46,6 +46,7 @@ public class StartPage : SitePageData
      public virtual IList<string> AbstractiveSummarisationList { get; set; }
 }
 ```
-Screenshot of Attribute being used
+**Example of attribute being used in the CMS with content in the string field ready for publishing**
+![AbstractiveSummarisation](/docs/Images/AbstractiveSummarisation.jpg)
 
 For more information about the [AbstractiveSummarisationList] attribute, click [here](https://github.com/AnilOptimizely/Patel-Azure.AI.Language.Optimizely/blob/develop/docs/Feature/AbstractiveSummarisationList.md)
