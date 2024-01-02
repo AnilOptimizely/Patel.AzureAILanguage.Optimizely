@@ -1,4 +1,4 @@
-# Patel-Azure.AI.Language.Optimizely
+# Patel.AzureAILanguage.Optimizely
 
 ## Intro
 
