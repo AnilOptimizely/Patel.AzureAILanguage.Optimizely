@@ -51,14 +51,3 @@ Below is a code snippet with all possible configuration options. Using the Key a
 
 ## Attributes
 Please visit [here](https://github.com/AnilOptimizely/Patel-Azure.AI.Language.Optimizely/blob/develop/docs/Attributes.md) to find out more information about the various attributes that are contained within this Add-On and how they work.
-
-## More Information
-
-Blog posts added soon
-
-
-
-
-
-
-
