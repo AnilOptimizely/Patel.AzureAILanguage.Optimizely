@@ -25,4 +25,5 @@ public class StartPage : SitePageData
 }
 ```
 
-Screenshot of Property being used
+**Example of boolean property being used in the CMS with HealthcareContentAllowed attribute used**
+![HealthcareContentAllowed](https://github.com/AnilOptimizely/Patel-Azure.AI.Language.Optimizely/blob/main/docs/Images/AIAzureLanguageBooleans.JPG)
