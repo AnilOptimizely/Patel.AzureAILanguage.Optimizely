@@ -29,4 +29,5 @@ public class StartPage : SitePageData
 public virtual bool TextAnalyticsAllowed { get; set; }
 }
 ```
-Screenshot of Property being used
+**Example of boolean property being used in the CMS with TextAnalyticsAllowed attribute used**
+![TextAnalyticsAllowed](https://github.com/AnilOptimizely/Patel-Azure.AI.Language.Optimizely/blob/main/docs/Images/AIAzureLanguageBooleans.JPG)
