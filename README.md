@@ -1,5 +1,6 @@
 # Patel.AzureAILanguage.Optimizely
 
+
 ## Intro
 
 This is an Add-On which integrates Azure AI Language - Text Analytics within Optimizely CMS 12. The Add-On provides users, the features and ability to integrate various functions which are part of the Azure AI Language Service within Optimizely CMS to allow content users to enchance, moderate and leverage content which is being published within the CMS. Some examples of functionality within this Add-On consists of the following.
@@ -15,7 +16,7 @@ This is an Add-On which integrates Azure AI Language - Text Analytics within Opt
 ## Installation
 
 ```
-dotnet add package Patel-Azure.AI.Language.Optimizely
+dotnet add package Patel.AzureAILanguage.Optimizely
 ```
 ## Setup
 
@@ -46,6 +47,18 @@ Below is a code snippet with all possible configuration options. Using the Key a
     x.TextAnalyticsEndpoint = "******************";
 })
 
+```
+You will also have to add the following line of code after calling the `.AddAzureAIContentSafety()` extension method
+```csharp
+.AddControllersWithViews().AddRazorRuntimeCompilation();
+```
+In the extension method in the Startup.Configure method, the following code will need to be added
+
+```csharp
+.UseEndpoints(endpoints => {
+  endpoints.MapContent();
+  endpoints.MapControllers();
+});
 ```
 
 ## Attributes

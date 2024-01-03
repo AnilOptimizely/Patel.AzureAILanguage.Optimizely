@@ -2,13 +2,13 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace Azure.AI.Language.Optimizely
+namespace Patel.AzureAILanguage.Optimizely
 {
     public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddAzureAILanguageOptimizely(this IServiceCollection services)
         {
-            return AddAzureAILanguageOptimizely(services, _ => { });
+            return services.AddAzureAILanguageOptimizely(_ => { });
         }
 
         public static IServiceCollection AddAzureAILanguageOptimizely(this IServiceCollection services, Action<AzureAILanguageOptimizelyOptions> setupAction)
@@ -18,7 +18,7 @@ namespace Azure.AI.Language.Optimizely
                 setupAction(options);
                 configuration.GetSection("Patel:AzureAILanguageOptimizely").Bind(options);
             });
-            
+
             return services;
         }
     }

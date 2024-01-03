@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace AzureAILanguage.Interfaces
+namespace Patel.AzureAILanguage.Optimizely.Interfaces
 {
     public interface IAzureAITextAnalyticsService
     {

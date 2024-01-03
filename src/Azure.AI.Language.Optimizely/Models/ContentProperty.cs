@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Azure.AI.Language.Optimizely.Models
+namespace Patel.AzureAILanguage.Optimizely.Models
 {
     public class ContentProperty
     {
