@@ -19,7 +19,7 @@ public class StartPage : SitePageData
 {
    [Display(
          GroupName = SystemTabNames.Content,
-         Name = "Recongnise Linked Entities List",
+         Name = "Linked Entities List",
          Description = "List used for the Recongnise Linked Entities feature",
          Order = 20)]
      [CultureSpecific]
@@ -27,5 +27,8 @@ public class StartPage : SitePageData
      public virtual IList<string> RecongniseLinkedEntitiesList { get; set; }
 }
 ```
+**Screenshot of Attribute being used in the CMS and being populated with linked entities from the API**
+
+![LinkedEntitiesListAttributePopulatedExampleCMS.](/docs/Images/LinkedEntitiesListAttributePopulatedExampleCMS.jpg)
 
 For more information about the [RecongniseLinkedEntities] attribute, click [here](https://github.com/AnilOptimizely/Patel-Azure.AI.Language.Optimizely/edit/develop/docs/Feature/RecongniseLinkedEntities.md)

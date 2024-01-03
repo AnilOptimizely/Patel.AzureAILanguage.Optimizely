@@ -5,7 +5,7 @@ via the Text Analytics API as an integral feature of the Azure AI Language Servi
 which has this attribute applied to.
 
 When content is being published in the CMS, For each [KeyPhraseExtraction] attribute used, 
-the Text Analytics API will identify the main concepts in the content being published. 
+the Text Analytics API will identify the main concepts in the content being published.
 
 The API will return a list of these key phrases, which is then used to populate an IList property of type IList string which has a [KeyPhraseExtractionList] attribute assigned to it. It is advised that only one instance of the [KeyPhraseExtractionList] attribute is added to each content type, when the KeyPhraseExtraction attribute is used
 
@@ -20,7 +20,7 @@ public class StartPage : SitePageData
 {
      [Display(
          GroupName = SystemTabNames.Content,
-         Name = "Key Phrase Extraction Text",
+         Name = "Key Phrase Text",
          Description = "Text used for the Key Phrase Extraction feature",
          Order = 10)]
      [CultureSpecific]
@@ -35,7 +35,7 @@ public class StartPage : SitePageData
 {
     [Display(
          GroupName = SystemTabNames.Content,
-         Name = "Key Phrase Extraction List",
+         Name = "Key Phrase List",
          Description = "List used for the Key Phrase Extraction feature",
          Order = 20)]
      [CultureSpecific]
@@ -43,8 +43,8 @@ public class StartPage : SitePageData
      public virtual IList<string> KeyPhraseExtractionList { get; set; }
 }
 ```
+**Screenshot of Attribute being used in the CMS**
+![KeyPhraseExtraction](/docs/Images/KeyPhraseExtraction.jpg)
 
-
-Screenshot of Attribute being used
 
 For more information about the [KeyPhraseExtractionList] attribute, click [here](https://github.com/AnilOptimizely/Patel-Azure.AI.Language.Optimizely/blob/develop/docs/Feature/KeyPhraseExtractionList.md)
