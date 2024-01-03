@@ -16,7 +16,7 @@ This is an Add-On which integrates Azure AI Language - Text Analytics within Opt
 ## Installation
 
 ```
-dotnet add package Patel.Azure.AI.Language.Optimizely
+dotnet add package Patel.AzureAILanguage.Optimizely
 ```
 ## Setup
 
