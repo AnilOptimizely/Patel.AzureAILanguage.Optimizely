@@ -15,7 +15,7 @@ This is an Add-On which integrates Azure AI Language - Text Analytics within Opt
 ## Installation
 
 ```
-dotnet add package Patel.Azure.AI.Language.Optimizely
+dotnet add package Patel.AzureAILanguage.Optimizely
 ```
 ## Setup
 
@@ -46,6 +46,18 @@ Below is a code snippet with all possible configuration options. Using the Key a
     x.TextAnalyticsEndpoint = "******************";
 })
 
+```
+You will also have to add the following line of code after calling the `.AddAzureAIContentSafety()` extension method
+```csharp
+.AddControllersWithViews().AddRazorRuntimeCompilation();
+```
+In the extension method in the Startup.Configure method, the following code will need to be added
+
+```csharp
+.UseEndpoints(endpoints => {
+  endpoints.MapContent();
+  endpoints.MapControllers();
+});
 ```
 
 ## Attributes
