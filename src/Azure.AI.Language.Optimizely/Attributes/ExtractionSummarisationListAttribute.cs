@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Azure.AI.Language.Optimizely.Attributes
+﻿namespace Patel.AzureAILanguage.Optimizely.Attributes
 {
     public class ExtractionSummarisationListAttribute : TextAnalyticsBaseContentAttribute
     {

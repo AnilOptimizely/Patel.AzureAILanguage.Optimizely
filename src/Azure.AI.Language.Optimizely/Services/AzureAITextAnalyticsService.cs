@@ -1,15 +1,14 @@
 ﻿using Azure.AI.TextAnalytics;
 using Azure;
-using AzureAILanguage.Interfaces;
 using Microsoft.Extensions.Options;
-using Azure.AI.Language.Optimizely;
 using EPiServer.ServiceLocation;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using Patel.AzureAILanguage.Optimizely.Interfaces;
 
-namespace AzureAILanguage.Services
+namespace Patel.AzureAILanguage.Optimizely.Services
 {
     public class AzureAITextAnalyticsService : IAzureAITextAnalyticsService
     {
@@ -19,9 +18,8 @@ namespace AzureAILanguage.Services
         private static readonly string TextAnalyticsSubscriptionKey = Configuration.Value.TextAnalyticsSubscriptionKey;
         private static readonly string TextAnalyticsEndpoint = Configuration.Value.TextAnalyticsEndpoint;
 
-        public TextAnalyticsClient GetTextAnalyticsClient()
+        public static TextAnalyticsClient GetTextAnalyticsClient()
         {
-            var key = TextAnalyticsSubscriptionKey;
             Uri endpointUrl = new(TextAnalyticsEndpoint);
             AzureKeyCredential credential = new(TextAnalyticsSubscriptionKey);
             TextAnalyticsClient client = new(endpointUrl, credential);
@@ -47,7 +45,7 @@ namespace AzureAILanguage.Services
             return analyseExtractiveSummarisation;
         }
 
-        private async Task<List<string>> ExtractiveSummarisation(List<string> batchedDocuments)
+        private static async Task<List<string>> ExtractiveSummarisation(List<string> batchedDocuments)
         {
             var listSentences = new List<string>();
             // Perform the text analysis operation.
@@ -131,7 +129,7 @@ namespace AzureAILanguage.Services
             var processRequest = GetTextAnalyticsClient().ExtractKeyPhrasesBatch(batchedDocuments);
             Console.WriteLine($"Key Phrase Extraction operation of text field has completed");
             var keyPhrases = processRequest.Value;
-            
+
             Console.WriteLine($"Number of Key Phrases detected is: {keyPhrases.Count}");
             foreach (var keyPhrase in keyPhrases)
             {
@@ -170,14 +168,14 @@ namespace AzureAILanguage.Services
             return getHealthcareContentList;
         }
 
-        private async Task<List<string>> AnalyseHealthcareContentFromText(string healthcareText)
+        private static async Task<List<string>> AnalyseHealthcareContentFromText(string healthcareText)
         {
             var healthcareTextList = new List<string>();
             var batchedTextList = new List<string>
             {
                 healthcareText
             };
-            
+
             AnalyzeHealthcareEntitiesOperation operation = GetTextAnalyticsClient().AnalyzeHealthcareEntities(WaitUntil.Completed, batchedTextList);
 
             await foreach (AnalyzeHealthcareEntitiesResultCollection documentsInPage in operation.Value)
@@ -211,7 +209,7 @@ namespace AzureAILanguage.Services
                                 healthcareTextList.Add(entity.Text);
                             }
                         }
-                       
+
                     }
                 }
             }
