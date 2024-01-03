@@ -15,7 +15,7 @@
 		<Nullable>disable</Nullable>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Version>0.0.0.6</Version>
+		<Version>0.0.0.8</Version>
 		<IsPackable>true</IsPackable>
 		<RepositoryUrl>https://github.com/AnilOptimizely/Patel-Azure.AI.Language.Optimizely</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/AnilOptimizely/Patel-Azure.AI.Language.Optimizely</PackageProjectUrl>
@@ -29,16 +29,11 @@
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<RepositoryType>git</RepositoryType>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<AssemblyVersion>0.0.0.6</AssemblyVersion>
+		<AssemblyVersion>0.0.0.8</AssemblyVersion>
 		<PackageReleaseNotes>Release that includes the first iteration of Azure AI Language - Text Analytics - Integration with Optimizely CMS.</PackageReleaseNotes>
 		<Title>Patel.AzureAILanguage.Optimizely</Title>
 	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Interface\**" />
-    <EmbeddedResource Remove="Interface\**" />
-    <None Remove="Interface\**" />
-  </ItemGroup>
 	<ItemGroup>
 		<None Include=".\README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
@@ -49,10 +44,6 @@
 		<PackageReference Include="EPiServer.CMS.UI.Core" Version="[12.0.2, 13.0.0)" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Initialization\" />
-	  <Folder Include="Services\" />
-	</ItemGroup>
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
