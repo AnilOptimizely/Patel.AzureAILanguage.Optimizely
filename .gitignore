@@ -2,3 +2,17 @@
 ## EPiServer Files
 ######################
 *License.config
+*.vsidx
+*.wsuo
+*.sqlite
+*.json
+*.v2
+*.suo
+*.dll
+*.pdb
+*.nupkg
+*.props
+*.cache
+/src/Azure.AI.Language.Optimizely/obj/Debug/net6.0
+/src/Azure.AI.Language.Optimizely/obj/Release/net6.0
+/src/Azure.AI.Language.Optimizely/obj

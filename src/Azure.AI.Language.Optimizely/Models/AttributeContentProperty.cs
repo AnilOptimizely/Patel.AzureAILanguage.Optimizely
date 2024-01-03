@@ -1,7 +1,7 @@
-﻿using Azure.AI.Language.Optimizely.Attributes;
+﻿using Patel.AzureAILanguage.Optimizely.Attributes;
 using System.Reflection;
 
-namespace AzureAIContentSafety.ContentSafety.Models
+namespace Patel.AzureAILanguage.Optimizely.Models
 {
     public class AttributeContentProperty
     {

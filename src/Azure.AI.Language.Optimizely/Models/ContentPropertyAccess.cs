@@ -1,12 +1,7 @@
 ﻿using EPiServer.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AzureAIContentSafety.ContentSafety.Models
+namespace Patel.AzureAILanguage.Optimizely.Models
 {
     public class ContentPropertyAccess
     {

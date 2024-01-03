@@ -1,21 +1,52 @@
-# Patel-AzureAIContentSafety
+# Patel.AzureAILanguage.Optimizely
 
-This is a extension which integrates Azure AI Content Safety within Optimizely CMS 12. This is built on an Alloy CMS template site to provide a platform/foundation to users as to how the Cotnent Safety service can be used to carry out various functions within Optimizely CMS to allow content editors/users of the CMS to moderate content which is being published within the CMS. These functions are shown below
+## Intro
 
-- Image Analysis
-- Text Analysis
-- Blocklist Management
+This is an Add-On which integrates Azure AI Language - Text Analytics within Optimizely CMS 12. The Add-On provides users, the features and ability to integrate various functions which are part of the Azure AI Language Service within Optimizely CMS to allow content users to enchance, moderate and leverage content which is being published within the CMS. Some examples of functionality within this Add-On consists of the following.
 
+- [Key Phrase Extraction](https://learn.microsoft.com/en-gb/azure/ai-services/language-service/key-phrase-extraction/overview)
+- [Sentiment Analysis](https://learn.microsoft.com/en-gb/azure/ai-services/language-service/sentiment-opinion-mining/overview?tabs=prebuilt)
+- [Text Analytics for Healthcare](https://learn.microsoft.com/en-gb/azure/ai-services/language-service/text-analytics-for-health/overview?tabs=ner)
+- [Language Detection](https://learn.microsoft.com/en-gb/azure/ai-services/language-service/language-detection/overview)
+- [Entity Linking](https://learn.microsoft.com/en-gb/azure/ai-services/language-service/entity-linking/overview)
+- [Extractive Summarisation](https://learn.microsoft.com/en-gb/azure/ai-services/language-service/summarization/overview?tabs=document-summarization)
+- [Abstractive Summarisation](https://learn.microsoft.com/en-gb/azure/ai-services/language-service/summarization/overview?tabs=document-summarization)
+
+## Installation
+
+```
+dotnet add package Patel-Azure.AI.Language.Optimizely
+```
 ## Setup
-Please visit [here](https://github.com/AnilOptimizely/Patel-AzureAIContentSafety/blob/main/docs/Features/Configuration/Setup.md) on how to setup the package on a local machine.
 
-## Features
+After installing the package, the following steps are required to be done to setup the Add-On correctly.
 
-### Image Analysis
-Please visit [here](https://github.com/AnilOptimizely/Patel-AzureAIContentSafety/blob/main/docs/Features/Image%20Analysis/ImageAnalysis.md) to find out more information about how Key Phrase extraction is used within the package.
+### Create Azure AI Services Resource
+1. Navigate to the Azure Portal by clicking [here](https://portal.azure.com/)
+1. Click on create new resource 
+1. Search for Azure AI Services
+2. Select the option Azure AI Services
+3. Fill out details in relation to Project Details (Choose Subscription) and Instance Details (Region/Name/Pricing Tier)
+4. Click Create
+5. When resource has been created, Navigate to the Keys and Endpoint section. An example screenshot of this is shown below
 
-### Text Analysis
-Please visit [here](https://github.com/AnilOptimizely/Patel-AzureAIContentSafety/blob/main/docs/Features/Text%20Analysis/TextAnalysis.md) to learn more about how Sentiment Analysis is used within Optimizely CMS.
+![ResourceKey.](https://github.com/AnilOptimizely/Patel-Azure.AI.Language.Optimizely/blob/main/docs/Images/AzureAIServicesResourceKeyEndpointInfo.JPG)
 
-### Blocklist Management
-Please visit [here](https://github.com/AnilOptimizely/Patel-AzureAIContentSafety/blob/main/docs/Features/Blocklist%20Management/BlocklistManagement.md) to understand more about how Text Analytics for healthcare is used. .
+7. Make a note of the Key and Endpoint variables - This will be needed in the Configuration section of Setup.
+
+### Configuration
+
+For the Add-On to work, you will have to call the `.AddAzureAILanguageOptimizely()` extension method in the Startup.ConfigureServices method.
+
+Below is a code snippet with all possible configuration options. Using the Key and Endpoint variables which have been retrieved from the Azure AI Resource, populate these details into the 'TextAnalyticsSubscriptionKey' and 'TextAnalyticsEndpoint' variables as shown below
+
+```csharp
+.AddAzureAILanguageOptimizely(x => {
+    x.TextAnalyticsSubscriptionKey = "************";
+    x.TextAnalyticsEndpoint = "******************";
+})
+
+```
+
+## Attributes
+Please visit [here](https://github.com/AnilOptimizely/Patel-Azure.AI.Language.Optimizely/blob/develop/docs/Attributes.md) to find out more information about the various attributes that are contained within this Add-On and how they work.

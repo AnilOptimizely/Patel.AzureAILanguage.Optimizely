@@ -1,20 +1,13 @@
-﻿using AzureAIContentSafety.ContentSafety.Models;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Azure.AI.Language.Optimizely.Attributes
+namespace Patel.AzureAILanguage.Optimizely.Attributes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public abstract class TextAnalyticsBaseContentAttribute : Attribute
     {
-        //public abstract void UpdateContent(AnalyzeTextResult analyseContentSafetyTextResult,
-        //    AzureAIContentSafetyService azureAIContentSafetyService, ContentPropertyAccess contentPropertyAccess);
-
         public virtual bool AnalyzeCMSContent => false;
 
         protected static bool IsBooleanProperty(PropertyInfo propertyInfo)

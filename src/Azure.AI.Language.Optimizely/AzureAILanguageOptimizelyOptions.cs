@@ -1,6 +1,6 @@
 ﻿using EPiServer.ServiceLocation;
 
-namespace Azure.AI.Language.Optimizely
+namespace Patel.AzureAILanguage.Optimizely
 {
     [ServiceConfiguration]
     public class AzureAILanguageOptimizelyOptions
