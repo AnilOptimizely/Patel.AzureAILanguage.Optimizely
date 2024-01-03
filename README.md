@@ -48,6 +48,18 @@ Below is a code snippet with all possible configuration options. Using the Key a
 })
 
 ```
+You will also have to add the following line of code after calling the `.AddAzureAIContentSafety()` extension method
+```csharp
+.AddControllersWithViews().AddRazorRuntimeCompilation();
+```
+In the extension method in the Startup.Configure method, the following code will need to be added
+
+```csharp
+.UseEndpoints(endpoints => {
+  endpoints.MapContent();
+  endpoints.MapControllers();
+});
+```
 
 ## Attributes
 Please visit [here](https://github.com/AnilOptimizely/Patel-Azure.AI.Language.Optimizely/blob/develop/docs/Attributes.md) to find out more information about the various attributes that are contained within this Add-On and how they work.
